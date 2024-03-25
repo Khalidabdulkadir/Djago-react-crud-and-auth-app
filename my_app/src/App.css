@@ -362,6 +362,21 @@
 
 
 /* Students  */
+.teacher-table{
+  width: 85%;
+  margin: 40px 160px;
+  border-collapse: collapse;
+}
+.teacher-table th, .teacher-table td {
+  border: 1px solid rgb(0, 0, 0);
+  padding: 8px;
+}
+.teacher-table th {
+  background-color: #d3cdcdbd;
+}
+.teacher-table .even-row {
+  background-color: #98d71091;
+}
 .student-table {
   width: 85%;
   margin: 40px 160px;

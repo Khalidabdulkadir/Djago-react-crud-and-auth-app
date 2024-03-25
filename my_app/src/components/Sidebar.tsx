@@ -37,6 +37,14 @@ const Sidebar: React.FC<SidebarProps> = ({ userName }) => {
                     <i className="fa-solid fa-building-columns"></i>
                         <Link to="/add-students" className="navLink">Add Students</Link> 
                     </li>
+                    <li className="navItem">
+                    <i className="fa-solid fa-building-columns"></i>
+                        <Link to="/teachers" className="navLink">Teachers</Link> 
+                    </li>
+                    <li className="navItem">
+                    <i className="fa-solid fa-person-chalkboard"></i>
+                        <Link to="/add-teachers" className="navLink">Add Teachers</Link> 
+                    </li>
                 </ul>
                 <hr className="separator" />
                 <div className="userDropdown">

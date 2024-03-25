@@ -1,36 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../App.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { setAuth } from './redux/authSlice';
-import { RootState } from './redux/store';
-import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
+import { RootState } from '../redux/store';
+import { setAuth } from '../redux/authSlice';
+import Sidebar from '../Sidebar';
 
-interface Student {
+interface Teacher {
     id: number;
     name: string;
     email: string;
     course: string;
-    nationalId: string;
+    mode: string;
     date_reg: string;
 }
 
-export default function ShowStudents(): JSX.Element {
-    const [students, setStudents] = useState<Student[]>([]);
+export default function ShowTeachers(): JSX.Element {
+    const [teachers, setTeachers] = useState<Teacher[]>([]);
 
-    const getStudents = async (): Promise<void> => {
+    const getTeacher = async (): Promise<void> => {
         try {
-            const response = await axios.get<{ results: Student[] }>("http://127.0.0.1:8000/students/");
-            const studentsData = response.data.results;
-            setStudents(studentsData);
+            const response = await axios.get<{ results: Teacher[] }>("http://127.0.0.1:8000/teachers/");
+            const TeachersData = response.data.results;
+            setTeachers(TeachersData);
         } catch (error) {
-            console.error("Error fetching students:", error);
+            console.error("Error fetching Teachers:", error);
         }
     };
 
     useEffect(() => {
-        getStudents();
+        getTeacher();
     }, []);
 
 
@@ -59,27 +58,27 @@ export default function ShowStudents(): JSX.Element {
                 <div>
                     <Sidebar userName={`${userInfo.firstName} ${userInfo.lastName}`} />
                     <div>
-                        <table className='student-table'>
+                        <table className='teacher-table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Course</th>
-                                    <th>National Id</th>
+                                    <th>Mode</th>
                                     <th>Date_reg</th>
                                     <th>Action</th> {/* Added a new header for the action */}
                                 </tr>
                             </thead>
                             <tbody>
-                                {students.map((student, index) => (
+                                {teachers.map((teacher, index) => (
                                     <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
-                                        <td>{student.name}</td>
-                                        <td>{student.email}</td>
-                                        <td>{student.course}</td>
-                                        <td>{student.nationalId}</td>
-                                        <td>{student.date_reg}</td>
+                                        <td>{teacher.name}</td>
+                                        <td>{teacher.email}</td>
+                                        <td>{teacher.course}</td>
+                                        <td>{teacher.mode}</td>
+                                        <td>{teacher.date_reg}</td>
                                         <td> {/* Actions column */}
-                                        <Link className="btn btn-outline-primary btn-sm" to={`/student/${student.id}`}>Details</Link>
+                                            <Link className="btn btn-outline-primary btn-sm" to={`/teacher/${teacher.id}/`}>details </Link>
                                         </td>
                                     </tr>
                                 ))}
